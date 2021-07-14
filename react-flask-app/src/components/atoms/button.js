@@ -10,17 +10,6 @@ const Button = styled.button `
     cursor: pointer;
 `;
 
-const RestaurantButton = styled.button `
-    background-color: ${orange};
-    padding: 5px 10px;
-    font-weight: bold;
-    font-size: 15px;
-    &:hover {
-        background-color: ${black};
-        color: ${orange};
-    }
-`;
-
 const BlackBtn = styled.button `
     background-color: ${black};
     color: ${wheat};
@@ -62,4 +51,4 @@ const DarkOrangeBtn = styled.button `
 `;
 
 export default Button;
-export { RestaurantButton, BlackBtn, OrangeBtn, DarkOrangeBtn };
+export { BlackBtn, OrangeBtn, DarkOrangeBtn };
