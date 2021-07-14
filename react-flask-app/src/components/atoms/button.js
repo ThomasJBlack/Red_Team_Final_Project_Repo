@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { orange, darkOrange, black, blanchedalmond, wheat } from '../../helpers/colors';
+import { orange, darkOrange, black, wheat } from '../../helpers/colors';
 
 const Button = styled.button `
     border: none;

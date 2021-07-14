@@ -28,30 +28,24 @@ const PriceCost = styled.p `
 const CartTotal = (props) => {
 
     const [cartTotal, setCartTotal] = useState(0);
-    const dummyCartTotal = 5000;
+    const [totalCost, setTotalCost] = useState(0.00);
+
+    const dummyCartTotal = 500;
+    const dummyCost = 1.23;
 
     useEffect(() => {
         setCartTotal(dummyCartTotal)
-    }, [props])
-
-    const [totalCost, setTotalCost] = useState(0.00)
-
-    const dummyCost = 1.23
-    useEffect(() => {
         setTotalCost(dummyCost);
-    }, [props])
+    }, [dummyCartTotal, dummyCost])
 
     return (
         <>
-        <TextWrapper>You have</TextWrapper>
-        <BagWrapper>
-            <TextWrapper>
-            {cartTotal}                
-            </TextWrapper>
-
-        </BagWrapper>
-        <TextWrapper>items in your bag, for a total of</TextWrapper>
-        <TextWrapper style={{fontSize: '36px'}}>${totalCost}</TextWrapper>
+            <TextWrapper>You have</TextWrapper>
+            <BagWrapper>
+                <TextWrapper style={{fontSize: '36px'}}>{cartTotal}</TextWrapper>
+            </BagWrapper>
+            <TextWrapper>items in your bag, for a total of</TextWrapper>
+            <TextWrapper style={{fontSize: '36px'}}>${totalCost}</TextWrapper>
         </>
     );
 }

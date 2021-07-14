@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 
 import CartTotal from '../molecules/cartTotal';
-import { black, blanchedalmond } from '../../helpers/colors';
+import { black, blanchedAlmond } from '../../helpers/colors';
 import { BlackBtn, DarkOrangeBtn } from '../atoms/button';
 
 const SideBarWrapper = styled.div `
@@ -11,7 +11,7 @@ const SideBarWrapper = styled.div `
     right: 0;
     height: calc(100vh + 90px);
     width: 200px;
-    background-color: ${blanchedalmond};
+    background-color: ${blanchedAlmond};
     padding: 0 28px;
     display: flex;
     flex-direction: column;
