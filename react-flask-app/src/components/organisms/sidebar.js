@@ -2,8 +2,9 @@ import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 
 import CartTotal from '../molecules/cartTotal';
+import Modal from '../molecules/placeOrderModal'
 import { black, blanchedAlmond } from '../../helpers/colors';
-import { BlackBtn, DarkOrangeBtn } from '../atoms/button';
+import Button, { BlackBtn, DarkOrangeBtn } from '../atoms/button';
 
 const SideBarWrapper = styled.div `
     position: fixed;
@@ -31,11 +32,16 @@ const PriceCost = styled.p `
 `;
 
 const SideBar = (props) => {
+
+    const [showModal, setShowModal] = useState(false);
+    const dummyPrice = 1.23;
+
     return (
         <SideBarWrapper>
             <DarkOrangeBtn>Show Location</DarkOrangeBtn>
             <CartTotal />
-            <BlackBtn>Finish and Pay</BlackBtn>
+            <BlackBtn onClick={() => setShowModal(true)}>Finish and Pay</BlackBtn>
+            <Modal onClose={() => setShowModal(false)} showModal={showModal} price={dummyPrice}/>
         </SideBarWrapper>
     );
 }
