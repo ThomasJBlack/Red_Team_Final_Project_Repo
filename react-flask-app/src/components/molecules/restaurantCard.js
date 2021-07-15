@@ -30,7 +30,7 @@ const RestaurantCard = (props) => {
     return (
         <CardBox>
             <img src={props.src}/>
-            <DarkOrangeBtn>Order from {props.name}</DarkOrangeBtn>
+            <DarkOrangeBtn onClick={() => props.setToggleMainContent(true)} >Order from {props.name}</DarkOrangeBtn>
         </CardBox>
     );
 }

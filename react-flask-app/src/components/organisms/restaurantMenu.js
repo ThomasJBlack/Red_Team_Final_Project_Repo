@@ -11,7 +11,9 @@ const MenuWrapper = styled.div `
     position: relative;
 `;
 
-const RestaurantMenu = () => {
+
+
+const RestaurantMenu = (props) => {
 
     return (
         <MenuWrapper>Work in progress...</MenuWrapper>
