@@ -7,16 +7,6 @@ import AlehouseLogo from '../../images/MoscowAlehouse-logo.png';
 import SangriaLogo from '../../images/SangriaGrill-logo.png';
 
 
-const CardsContainer = styled.div `
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
-    padding: 30px;
-    background-color: ${darkOrange};
-    min-height: 100vh;
-`;
-
 const RestaurantOptions = () => {
     let cardData = [
         {
@@ -33,13 +23,13 @@ const RestaurantOptions = () => {
         },
     ]
     return (
-        <CardsContainer>
+        <>
             {cardData.map((data) => {
                 return (
                     <Card {...data} />
                 )
             })}
-        </CardsContainer>
+        </>
     );
 }
 
