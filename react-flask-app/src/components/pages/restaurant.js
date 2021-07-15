@@ -1,11 +1,16 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 
+import RestaurantCard from '../molecules/restaurantCard';
 import Header from '../organisms/header';
 import SideBar from '../organisms/sidebar';
 import RestaurantMenu from '../organisms/restaurantMenu';
-import RestaurantOptions from '../organisms/restaurantOptions';
 import { darkOrange } from '../../helpers/colors';
+
+import MaialinaLogo from '../../images/MaialinaPizzeriaNapoletana-logo.png';
+import AlehouseLogo from '../../images/MoscowAlehouse-logo.png';
+import SangriaLogo from '../../images/SangriaGrill-logo.png';
+
 
 const BodyWrapper = styled.body `
 margin: 0;
@@ -30,17 +35,35 @@ const MainContentBox = styled.div `
 `;
 
 const Restaurant = () => {
-    const [menu, setMenu] = useState(false);
-    const [options, setOptions] = useState(false);
+    const [toggleMainContent, setToggleMainContent] = useState(false);
+
+    let cardData = [
+        {
+            name: 'Maialina Pizzeria Napoletana',
+            srcLogo: MaialinaLogo
+        },
+        {
+            name: 'Moscow Alehouse',
+            srcLogo: AlehouseLogo
+        },
+        {
+            name: 'Sangria Grill',
+            srcLogo: SangriaLogo
+        },
+    ]
 
     return (
         <BodyWrapper>
-            <Header/>
-            <SideBar />
+            <Header />
+            <SideBar setToggleMainContent={setToggleMainContent} />
             <TopRightPadding>
                 <MainContentBox>
-                    <RestaurantOptions/>
-                </MainContentBox>                 
+                    {
+                        toggleMainContent ?
+                        <RestaurantMenu /> :
+                        cardData.map((data) => <RestaurantCard {...data} setToggleMainContent={setToggleMainContent}/>)
+                    }
+                </MainContentBox>
             </TopRightPadding>
 
         </BodyWrapper>
