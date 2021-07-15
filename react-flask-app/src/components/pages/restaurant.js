@@ -40,15 +40,15 @@ const Restaurant = () => {
     let cardData = [
         {
             name: 'Maialina Pizzeria Napoletana',
-            src: MaialinaLogo
+            srcLogo: MaialinaLogo
         },
         {
             name: 'Moscow Alehouse',
-            src: AlehouseLogo
+            srcLogo: AlehouseLogo
         },
         {
             name: 'Sangria Grill',
-            src: SangriaLogo
+            srcLogo: SangriaLogo
         },
     ]
 
@@ -61,11 +61,7 @@ const Restaurant = () => {
                     {
                         toggleMainContent ?
                         <RestaurantMenu /> :
-                        cardData.map((data) => {
-                            return (
-                                <RestaurantCard {...data} setToggleMainContent={setToggleMainContent}/>
-                            )
-                        })
+                        cardData.map((data) => <RestaurantCard {...data} setToggleMainContent={setToggleMainContent}/>)
                     }
                 </MainContentBox>
             </TopRightPadding>

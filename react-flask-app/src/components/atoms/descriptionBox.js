@@ -18,7 +18,7 @@ const DescriptionBoxWrapper = styled.div `
 
 const DescriptionBox = (props) => {
 
-    dummyData = {
+    const dummyData = {
         name: 'Call Me Maybe',
         digits: '208-924-4455',
     }
@@ -29,3 +29,5 @@ const DescriptionBox = (props) => {
         </DescriptionBoxWrapper>
     )
 }
+
+export default DescriptionBox;
