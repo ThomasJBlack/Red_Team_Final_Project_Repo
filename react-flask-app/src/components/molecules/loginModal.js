@@ -48,8 +48,11 @@ const TotalAmountText = styled.h1`
     font-size: 30px;
     color: black;
 `;
+const UserOption = styled.option`
+	
+`
 
-const OrderList = styled.ol`
+const UserDropdown = styled.select`
     display: inline;
     list-style-type: decimal;
     margin-block-start: 1em;
@@ -59,19 +62,16 @@ const OrderList = styled.ol`
     padding-inline-start: 40px;
 `;
 
-const Modal = (props) => {
-
-    const dummyData = ['French Fries', 'Burger', 'Milk Shake'];
-
-    return (
-        <ModalContainer>
-            <TotalAmountText>Your total is: ${props.price}</TotalAmountText>
-            <OrderList>{dummyData}</OrderList>
-            <DarkOrangeBtn>Place Order</DarkOrangeBtn>
-            <DarkOrangeBtn onClick={props.onClose}>Back</DarkOrangeBtn>
-        </ModalContainer>
-    )
+const LoginModal = (props) => {
+	return (
+		<ModalContainer>
+			<TotalAmountText>Create User or Login</TotalAmountText>
+			{/* <UserDropdown>{props.users.map((user) => <option value={user} />)}</UserDropdown> */}
+			<DarkOrangeBtn>Create New User</DarkOrangeBtn>
+			<DarkOrangeBtn onClick={props.onClose}>Back</DarkOrangeBtn>
+		</ModalContainer>
+	)
 };
 
 
-export default Modal;
+export default LoginModal;

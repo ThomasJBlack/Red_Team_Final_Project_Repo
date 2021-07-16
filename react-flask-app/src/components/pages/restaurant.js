@@ -12,19 +12,19 @@ import AlehouseLogo from '../../images/MoscowAlehouse-logo.png';
 import SangriaLogo from '../../images/SangriaGrill-logo.png';
 
 
-const BodyWrapper = styled.body `
+const BodyWrapper = styled.body`
 margin: 0;
 padding: 0;
 overflow-x: hidden;
 `;
 
-const TopRightPadding = styled.div `
+const TopRightPadding = styled.div`
     padding-top: 120px;
     padding-right: 200px;
     background-color: ${darkOrange};
 `;
 
-const MainContentBox = styled.div `
+const MainContentBox = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -35,39 +35,40 @@ const MainContentBox = styled.div `
 `;
 
 const Restaurant = () => {
-    const [toggleMainContent, setToggleMainContent] = useState(false);
+	const [toggleMainContent, setToggleMainContent] = useState(false);
+	const [user, setUser] = useState('');
 
-    let cardData = [
-        {
-            name: 'Maialina Pizzeria Napoletana',
-            srcLogo: MaialinaLogo
-        },
-        {
-            name: 'Moscow Alehouse',
-            srcLogo: AlehouseLogo
-        },
-        {
-            name: 'Sangria Grill',
-            srcLogo: SangriaLogo
-        },
-    ]
+	let cardData = [
+		{
+			name: 'Maialina Pizzeria Napoletana',
+			srcLogo: MaialinaLogo
+		},
+		{
+			name: 'Moscow Alehouse',
+			srcLogo: AlehouseLogo
+		},
+		{
+			name: 'Sangria Grill',
+			srcLogo: SangriaLogo
+		},
+	]
 
-    return (
-        <BodyWrapper>
-            <Header />
-            <SideBar setToggleMainContent={setToggleMainContent} />
-            <TopRightPadding>
-                <MainContentBox>
-                    {
-                        toggleMainContent ?
-                        <RestaurantMenu /> :
-                        cardData.map((data) => <RestaurantCard {...data} setToggleMainContent={setToggleMainContent}/>)
-                    }
-                </MainContentBox>
-            </TopRightPadding>
+	return (
+		<BodyWrapper>
+			<Header user={user} setUser={setUser} />
+			<SideBar setToggleMainContent={setToggleMainContent} />
+			<TopRightPadding>
+				<MainContentBox>
+					{
+						toggleMainContent ?
+							<RestaurantMenu /> :
+							cardData.map((data) => <RestaurantCard {...data} setToggleMainContent={setToggleMainContent} />)
+					}
+				</MainContentBox>
+			</TopRightPadding>
 
-        </BodyWrapper>
-    )
+		</BodyWrapper>
+	)
 }
 
 export default Restaurant;
