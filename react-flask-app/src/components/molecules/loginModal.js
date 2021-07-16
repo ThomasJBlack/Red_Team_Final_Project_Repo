@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 import { orange, darkOrange, blanchedAlmond } from '../../helpers/colors';
-import DeliveryBikeImg from '../../images/delivery-bike-icon.png'
 import { DarkOrangeBtn } from '../atoms/button';
 
 const ModalContainer = styled.div`
@@ -12,7 +11,6 @@ const ModalContainer = styled.div`
     width: 400px;
     height: 400px;    
     background-color: ${blanchedAlmond};
-    background-image: url(${DeliveryBikeImg});
     background-position: 90% 90%;
     background-repeat: no-repeat;
     background-size: 100px;
@@ -62,13 +60,13 @@ const UserDropdown = styled.select`
     padding-inline-start: 40px;
 `;
 
-const LoginModal = (props) => {
+const LoginModal = ({ onClose, users }) => {
 	return (
 		<ModalContainer>
 			<TotalAmountText>Create User or Login</TotalAmountText>
-			{/* <UserDropdown>{props.users.map((user) => <option value={user} />)}</UserDropdown> */}
+			<UserDropdown>{Object.keys(users).map((name, i) => <option key={users[name].user_id} >{name}</option>)}</UserDropdown>
 			<DarkOrangeBtn>Create New User</DarkOrangeBtn>
-			<DarkOrangeBtn onClick={props.onClose}>Back</DarkOrangeBtn>
+			<DarkOrangeBtn onClick={onClose}>Back</DarkOrangeBtn>
 		</ModalContainer>
 	)
 };

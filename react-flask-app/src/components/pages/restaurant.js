@@ -37,6 +37,7 @@ const MainContentBox = styled.div`
 const Restaurant = () => {
 	const [toggleMainContent, setToggleMainContent] = useState(false);
 	const [user, setUser] = useState('');
+	
 
 	let cardData = [
 		{

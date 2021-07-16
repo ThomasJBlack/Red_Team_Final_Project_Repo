@@ -44,6 +44,20 @@ const LocationWrapper = styled.div`
 const Header = ({ user, setUser }) => {
     const [showLoginModal, setShowLoginModal] = useState(false);
 
+    const dummyUsers = {
+        'Froh': {
+            user_id: 1,
+            user_address: null
+        },
+        'Thomas': {
+            user_id: 2,
+            user_address: null
+        },
+        'Nathaniel': {
+            user_id: 3,
+            user_address: null
+        },
+    }
     return (
         <HeaderWrapper>
             <h1>Dinner Delivery</h1>
@@ -51,7 +65,7 @@ const Header = ({ user, setUser }) => {
                 <p>Current Location: Moscow Idaho</p>
                 <OrangeBtn>change</OrangeBtn>
                 <OrangeBtn onClick={() => setShowLoginModal(true)}>Login</OrangeBtn>
-                {showLoginModal && <LoginModal onClose={() => setShowLoginModal(false)} showLoginModal={showLoginModal} users={'thomas', 'nathanial', 'froh'} />}
+                {showLoginModal && <LoginModal onClose={() => setShowLoginModal(false)} users={dummyUsers} />}
             </LocationWrapper>
         </HeaderWrapper>
     );
