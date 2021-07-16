@@ -1,9 +1,11 @@
 SELECT
     user_table.user_name,
-    user_items.item_name
+    item_table.item_name
 FROM
-    user_table
+    favorite_item_table
 JOIN
-    user_items ON user_items.user_id = user_table.user_id
-WHERE 
-    user_id = 1;
+    user_table ON user_table.user_id = favorite_item_table.user_id
+JOIN
+    item_table ON item_table.item_id = favorite_item_table.item_id
+WHERE
+    user_table.user_name = 'Thomas';
