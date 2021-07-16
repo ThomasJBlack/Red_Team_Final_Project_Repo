@@ -1,10 +1,11 @@
 import styled from 'styled-components';
-import react from 'react';
+import react, { useState, useEffect } from 'react';
 
 import { black } from '../../helpers/colors';
 import { OrangeBtn } from '../atoms/button'
+import LoginModal from '../molecules/loginModal'
 
-const HeaderWrapper = styled.header `
+const HeaderWrapper = styled.header`
     width: 100%;
     padding: 5px 30px;
     position: fixed;
@@ -33,24 +34,41 @@ const HeaderWrapper = styled.header `
     }
 `;
 
-const LocationWrapper = styled.div `
+const LocationWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: end;
 `;
 
 
-const header = () => {
+const Header = ({ user, setUser }) => {
+    const [showLoginModal, setShowLoginModal] = useState(false);
 
+    const dummyUsers = {
+        'Froh': {
+            user_id: 1,
+            user_address: null
+        },
+        'Thomas': {
+            user_id: 2,
+            user_address: null
+        },
+        'Nathaniel': {
+            user_id: 3,
+            user_address: null
+        },
+    }
     return (
         <HeaderWrapper>
             <h1>Dinner Delivery</h1>
             <LocationWrapper>
                 <p>Current Location: Moscow Idaho</p>
-                <OrangeBtn>change</OrangeBtn>                
+                <OrangeBtn>change</OrangeBtn>
+                <OrangeBtn onClick={() => setShowLoginModal(true)}>Login</OrangeBtn>
+                {showLoginModal && <LoginModal onClose={() => setShowLoginModal(false)} users={dummyUsers} />}
             </LocationWrapper>
         </HeaderWrapper>
     );
 }
 
-export default header;
+export default Header;

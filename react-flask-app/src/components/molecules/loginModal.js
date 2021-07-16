@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 import { orange, darkOrange, blanchedAlmond } from '../../helpers/colors';
-import DeliveryBikeImg from '../../images/delivery-bike-icon.png'
 import { DarkOrangeBtn } from '../atoms/button';
 
 const ModalContainer = styled.div`
@@ -12,7 +11,6 @@ const ModalContainer = styled.div`
     width: 400px;
     height: 400px;    
     background-color: ${blanchedAlmond};
-    background-image: url(${DeliveryBikeImg});
     background-position: 90% 90%;
     background-repeat: no-repeat;
     background-size: 100px;
@@ -48,8 +46,11 @@ const TotalAmountText = styled.h1`
     font-size: 30px;
     color: black;
 `;
+const UserOption = styled.option`
+	
+`
 
-const OrderList = styled.ol`
+const UserDropdown = styled.select`
     display: inline;
     list-style-type: decimal;
     margin-block-start: 1em;
@@ -59,19 +60,16 @@ const OrderList = styled.ol`
     padding-inline-start: 40px;
 `;
 
-const Modal = (props) => {
-
-    const dummyData = ['French Fries', 'Burger', 'Milk Shake'];
-
-    return (
-        <ModalContainer>
-            <TotalAmountText>Your total is: ${props.price}</TotalAmountText>
-            <OrderList>{dummyData}</OrderList>
-            <DarkOrangeBtn>Place Order</DarkOrangeBtn>
-            <DarkOrangeBtn onClick={props.onClose}>Back</DarkOrangeBtn>
-        </ModalContainer>
-    )
+const LoginModal = ({ onClose, users }) => {
+	return (
+		<ModalContainer>
+			<TotalAmountText>Create User or Login</TotalAmountText>
+			<UserDropdown>{Object.keys(users).map((name, i) => <option key={users[name].user_id} >{name}</option>)}</UserDropdown>
+			<DarkOrangeBtn>Create New User</DarkOrangeBtn>
+			<DarkOrangeBtn onClick={onClose}>Back</DarkOrangeBtn>
+		</ModalContainer>
+	)
 };
 
 
-export default Modal;
+export default LoginModal;
