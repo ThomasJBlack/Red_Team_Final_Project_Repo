@@ -20,6 +20,7 @@ const SideBarWrapper = styled.div `
     align-items: center;
     color: ${black};
     z-index: 5;
+    margin-top: 5%;
 `;
 
 const TextWrapper = styled.p `
