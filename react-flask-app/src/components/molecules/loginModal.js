@@ -64,7 +64,7 @@ const LoginModal = ({ onClose, users }) => {
 	return (
 		<ModalContainer>
 			<TotalAmountText>Create User or Login</TotalAmountText>
-			<UserDropdown>{Object.keys(users).map((name, i) => <option key={users[name].user_id} >{name}</option>)}</UserDropdown>
+			{/* <UserDropdown>{Object.keys(users).map((name, i) => <option key={users[name].user_id} >{name}</option>)}</UserDropdown> */}
 			<DarkOrangeBtn>Create New User</DarkOrangeBtn>
 			<DarkOrangeBtn onClick={onClose}>Back</DarkOrangeBtn>
 		</ModalContainer>
