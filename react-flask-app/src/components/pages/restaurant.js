@@ -37,18 +37,28 @@ const MainContentBox = styled.div`
 const Restaurant = () => {
 	const [toggleMainContent, setToggleMainContent] = useState(false);
 	const [user, setUser] = useState('');
-	
+	const [users, setUsers] = useState([]);
+
+	useEffect(() => {
+		fetch("/user").then(res => res.json()).then(data => {
+			console.log(data);
+			setUsers(data);
+		});
+	}, []);
 
 	let cardData = [
 		{
+			id: 1,
 			name: 'Maialina Pizzeria Napoletana',
 			srcLogo: MaialinaLogo
 		},
 		{
+			id: 2,
 			name: 'Moscow Alehouse',
 			srcLogo: AlehouseLogo
 		},
 		{
+			id: 3,
 			name: 'Sangria Grill',
 			srcLogo: SangriaLogo
 		},
@@ -63,7 +73,7 @@ const Restaurant = () => {
 					{
 						toggleMainContent ?
 							<RestaurantMenu /> :
-							cardData.map((data) => <RestaurantCard {...data} setToggleMainContent={setToggleMainContent} />)
+							cardData.map((data) => <RestaurantCard key={data.id} {...data} setToggleMainContent={setToggleMainContent} />)
 					}
 				</MainContentBox>
 			</TopRightPadding>
