@@ -39,25 +39,36 @@ const Restaurant = () => {
 	const [user, setUser] = useState('');
 	
 	const [userAccounts, setUserAccounts] = useState();
+	const [restaurants, setRestaurants] = useState();
 
 	useEffect(() => {
 		fetch("/user").then(res => res.json()).then(data => {
 		  setUserAccounts(data.data);
 		});
+
+		fetch("/").then(res => res.json()).then(data => {
+			setRestaurants(data.data);
+			console.log("restaurants went")
+
+		});
 	  }, []);
 
-	console.log(userAccounts);
-	
-	let cardData = [
+	// console.log(userAccounts);
+	// console.log(restaurants);
+
+	let restaurantData = [
 		{
+			id: '',
 			name: 'Maialina Pizzeria Napoletana',
 			srcLogo: MaialinaLogo
 		},
 		{
+			id: '',
 			name: 'Moscow Alehouse',
 			srcLogo: AlehouseLogo
 		},
 		{
+			id: '',
 			name: 'Sangria Grill',
 			srcLogo: SangriaLogo
 		},
@@ -72,7 +83,7 @@ const Restaurant = () => {
 					{
 						toggleMainContent ?
 							<RestaurantMenu /> :
-							cardData.map((data) => <RestaurantCard {...data} setToggleMainContent={setToggleMainContent} />)
+							restaurantData.map((data) => <RestaurantCard {...data} setToggleMainContent={setToggleMainContent} />)
 					}
 				</MainContentBox>
 			</TopRightPadding>

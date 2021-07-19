@@ -1,6 +1,7 @@
 import time
 import pymysql
-from flask import Flask
+from flask import Flask, request
+import json
 
 app = Flask(__name__)
 
@@ -18,21 +19,23 @@ def get_current_time():
 
 @app.route('/', methods=['GET'])
 def getRestaurants():
-    sql = 'SELECT restaurant_name, restaurant_id FROM final_project.restaurant_table'
+    sql = 'SELECT restaurant_name, restaurant_id FROM final_project.restaurant_table;'
     cursor.execute(sql)
     data = cursor.fetchall()
-    return {'data': data}
+    print(data)
+    return json.loads(data)
 
 @app.route('/user', methods=['GET'])
 def getUsernames():
-    sql = 'SELECT user_name, user_id FROM final_project.user_table'
+    sql = 'SELECT user_name, user_id FROM final_project.user_table;'
     cursor.execute(sql)
     data = cursor.fetchall()
-    return {'data': data}
+    return json.loads(data)
 
 @app.route('/menu', methods=['POST'])
 def getMenu():
-    restaurant_id = restaurant_id
+
+    restaurant_id = request.json()['restaurant_id']
     sql = f"""
         SELECT 
             item_name, item_price, item_id
@@ -47,7 +50,7 @@ def getMenu():
 
 @app.route('/cart', methods=['POST'])
 def getCart():
-    user_id = user_id
+    user_id = request.json()['user_id']
     sql = f"""
         SELECT
             item_name, item_price
@@ -64,9 +67,10 @@ def getCart():
 
 @app.route('/add_favorite', methods=['POST'])
 def addFavorite():
-    term = term
-    favorite_id = favorite_id
-    user_id = user_id
+    inputs = request.json()
+    term = input['term']
+    favorite_id = input['favorite_id']
+    user_id = input['user_id']
     sql = f"""
         INSERT INTO 
             final_project.favorite_{term}_table
