@@ -35,7 +35,7 @@ def getMenu():
     restaurant_id = restaurant_id
     sql = f"""
         SELECT 
-            item_name, item_price, item_id
+            item_name, item_id
         FROM
             final_project.item_table
         WHERE
