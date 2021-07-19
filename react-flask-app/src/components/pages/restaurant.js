@@ -38,11 +38,11 @@ const Restaurant = () => {
 	const [toggleMainContent, setToggleMainContent] = useState(false);
 	const [user, setUser] = useState('');
 	
-	const [userAccounts, setuserAccounts] = useState();
+	const [userAccounts, setUserAccounts] = useState();
 
 	useEffect(() => {
 		fetch("/user").then(res => res.json()).then(data => {
-		  setuserAccount(data.data);
+		  setUserAccounts(data.data);
 		});
 	  }, []);
 
