@@ -45,22 +45,22 @@ def getMenu():
     data = cursor.fetchall()
     return {'data': data}
 
-@app.route('/cart', methods=['POST'])
-def getCart():
-    user_id = user_id
-    sql = f"""
-        SELECT
-            item_name, item_price
-        FROM 
-            final_project.order_table
-        JOIN
-            final_project.item_table ON item_table.item_id = order_table.item_id
-        WHERE
-            user_id = {user_id}
-    """
-    cursor.execute(sql)
-    data = cursor.fetchall()
-    return {'data': data}
+# @app.route('/cart', methods=['POST'])
+# def getCart():
+#     user_id = user_id
+#     sql = f"""
+#         SELECT
+#             item_name, item_price
+#         FROM 
+#             final_project.order_table
+#         JOIN
+#             final_project.item_table ON item_table.item_id = order_table.item_id
+#         WHERE
+#             user_id = {user_id}
+#     """
+#     cursor.execute(sql)
+#     data = cursor.fetchall()
+#     return {'data': data}
 
 @app.route('/add_favorite', methods=['POST'])
 def addFavorite():
@@ -79,4 +79,26 @@ def addFavorite():
         db.commit()
         return True
     except:
+        db.rollback()
         return False
+
+@app.route('/place_order', methods=['POST'])
+def placeOrder():
+    user_id = user_id
+    item_ids = [item_ids]
+    order_number = 0
+    for item_id in item_ids:
+        sql = f"""
+            INSERT INTO 
+                final_project.order_table
+                ( item_id, user_id, order_number)
+            VALUES
+                ({item_id}, {user_id}, {order_number});
+        """
+        try:
+            cursor.execute(sql)
+            db.commit()
+            order_number += 1
+            return True
+        except:
+            db.rollback()
