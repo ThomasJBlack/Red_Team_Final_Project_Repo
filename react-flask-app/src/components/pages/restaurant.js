@@ -38,7 +38,16 @@ const Restaurant = () => {
 	const [toggleMainContent, setToggleMainContent] = useState(false);
 	const [user, setUser] = useState('');
 	
+	const [userAccounts, setuserAccounts] = useState();
 
+	useEffect(() => {
+		fetch("/user").then(res => res.json()).then(data => {
+		  setuserAccount(data.data);
+		});
+	  }, []);
+
+	console.log(userAccounts);
+	
 	let cardData = [
 		{
 			name: 'Maialina Pizzeria Napoletana',
@@ -56,7 +65,7 @@ const Restaurant = () => {
 
 	return (
 		<BodyWrapper>
-			<Header user={user} setUser={setUser} />
+			<Header user={user} setUser={setUser} userAccounts={userAccounts}/>
 			<SideBar setToggleMainContent={setToggleMainContent} />
 			<TopRightPadding>
 				<MainContentBox>
