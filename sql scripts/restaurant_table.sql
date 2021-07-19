@@ -8,6 +8,6 @@ CREATE TABLE restaurant_table (
 INSERT INTO final_project.restaurant_table
     ( restaurant_name )
 VALUES
-    ('Maialina Pizzeria Neapolitana'),
+    ('Maialina Pizzeria Napoletana'),
     ('Moscow Alehouse'),
-    ('Sangria Grille');
+    ('Sangria Grill');

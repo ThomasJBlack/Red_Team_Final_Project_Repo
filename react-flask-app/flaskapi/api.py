@@ -3,6 +3,13 @@ import pymysql
 
 app = Flask(__name__)
 
+db = pymysql.connect(
+    host='freetrainer.cryiqqx3x1ub.us-west-2.rds.amazonaws.com',
+    user='elijah',
+    password='changeme'
+)
+
+cursor = db.cursor()
 
 # @app.route('/time')
 # def get_current_time():
