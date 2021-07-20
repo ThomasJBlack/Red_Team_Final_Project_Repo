@@ -15,12 +15,12 @@ cursor = db.cursor()
 
 @app.route('/restaurant', methods=['GET'])
 def getRestaurants():
-    print("fetching restaurant data")
+    # print("fetching restaurant data")
     sql = 'SELECT restaurant_name, restaurant_id FROM final_project.restaurant_table;'
     cursor.execute(sql)
     data = cursor.fetchall()
 
-    print(data)
+    # print(data)
     return jsonConversion(data)
 
 

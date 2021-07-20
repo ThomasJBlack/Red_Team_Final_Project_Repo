@@ -49,8 +49,6 @@ const Restaurant = () => {
 		});
 	}, []);
 
-	// console.log(currentRestaurant);
-
 	let restaurantData = [
 		{
 			id: 1,
@@ -68,17 +66,21 @@ const Restaurant = () => {
 			srcLogo: AlehouseLogo
 		}
 	]
+	const handleClick = (event) => {
+		// itemName = event.target.value;
+		// define the add to cart button here? 
+	}
 
 	return (
-		<BodyWrapper>
+		<BodyWrapper key="restaurantWrapper">
 			<Header user={user} setUser={setUser} userAccounts={userAccounts} />
 			<SideBar setToggleMainContent={setToggleMainContent} />
 			<TopRightPadding>
 				<MainContentBox>
 					{
 						toggleMainContent ?
-							<RestaurantMenu currentRestaurant={currentRestaurant} /> :
-							restaurantData.map((data) => <RestaurantCard {...data} setToggleMainContent={setToggleMainContent} setCurrentRestaurant={setCurrentRestaurant} />)
+							<RestaurantMenu key="restaurantMenuKey" currentRestaurant={currentRestaurant} handleClick={handleClick} /> :
+							restaurantData.map((data) => <RestaurantCard key={"dataKey" + data.len} {...data} setToggleMainContent={setToggleMainContent} setCurrentRestaurant={setCurrentRestaurant} />)
 					}
 				</MainContentBox>
 			</TopRightPadding>
