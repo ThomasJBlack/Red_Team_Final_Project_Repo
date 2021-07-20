@@ -2,8 +2,9 @@ import styled from 'styled-components';
 
 import { blanchedAlmond, black, orangeRed } from '../../helpers/colors';
 import { DarkOrangeBtn } from '../atoms/button';
+import localJsonData from '../../local-restaurant-json-data.json';
 
-const CardBox = styled.div `
+const CardBox = styled.div`
     display: flex;
     flex-direction: column;
     max-width: 400px;
@@ -25,12 +26,13 @@ background-color: ${blanchedAlmond};
     }
 `;
 
-const RestaurantCard = (props) => {
+const RestaurantCard = ({ id, name, srcLogo, setToggleMainContent, setCurrentRestaurant }) => {
+
 
     return (
         <CardBox>
-            <img src={props.srcLogo}/>
-            <DarkOrangeBtn onClick={() => {props.setToggleMainContent(true); props.setCurrentRestaurant(props.id)}} >Order from {props.name}</DarkOrangeBtn>
+            <img src={srcLogo} />
+            <DarkOrangeBtn onClick={() => { setToggleMainContent(true); setCurrentRestaurant(id) }} >Order from {name}</DarkOrangeBtn>
         </CardBox>
     );
 }

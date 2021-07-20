@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 
-const DescriptionBoxWrapper = styled.div `
+const DescriptionBoxWrapper = styled.div`
     position: absolute;
     transform: rotate(
     3deg
@@ -16,16 +16,12 @@ const DescriptionBoxWrapper = styled.div `
     text-align: center;
 `;
 
-const DescriptionBox = (props) => {
+const DescriptionBox = ({ name = "error: undefined name", digits = "error: undefined phone number" }) => {
 
-    const dummyData = {
-        name: 'Call Me Maybe',
-        digits: '208-924-4455',
-    }
     return (
         <DescriptionBoxWrapper>
-            <h2>{dummyData.name}</h2>
-            <p>{dummyData.digits}</p>
+            <h2>{name}</h2>
+            <p>{digits}</p>
         </DescriptionBoxWrapper>
     )
 }

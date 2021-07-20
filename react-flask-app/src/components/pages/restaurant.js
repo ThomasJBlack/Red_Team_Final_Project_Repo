@@ -11,6 +11,8 @@ import MaialinaLogo from '../../images/MaialinaPizzeriaNapoletana-logo.png';
 import AlehouseLogo from '../../images/MoscowAlehouse-logo.png';
 import SangriaLogo from '../../images/SangriaGrill-logo.png';
 
+import localJsonData from '../../local-restaurant-json-data.json';
+
 
 const BodyWrapper = styled.body`
 margin: 0;
@@ -37,17 +39,18 @@ const MainContentBox = styled.div`
 const Restaurant = () => {
 	const [toggleMainContent, setToggleMainContent] = useState(false);
 	const [user, setUser] = useState('');
-	
+
 	const [userAccounts, setUserAccounts] = useState();
 	const [currentRestaurant, setCurrentRestaurant] = useState();
 
 	useEffect(() => {
 		fetch("/user").then(res => res.json()).then(data => {
-		  setUserAccounts(data.data);
+			setUserAccounts(data);
 		});
-	  }, []);
+	}, []);
 
-	console.log(currentRestaurant);
+	// console.log(currentRestaurant);
+
 	let restaurantData = [
 		{
 			id: 1,
@@ -56,26 +59,26 @@ const Restaurant = () => {
 		},
 		{
 			id: 2,
-			name: 'Moscow Alehouse',
-			srcLogo: AlehouseLogo
-		},
-		{
-			id: 3,
 			name: 'Sangria Grill',
 			srcLogo: SangriaLogo
 		},
+		{
+			id: 3,
+			name: 'Moscow Alehouse',
+			srcLogo: AlehouseLogo
+		}
 	]
 
 	return (
 		<BodyWrapper>
-			<Header user={user} setUser={setUser} userAccounts={userAccounts}/>
+			<Header user={user} setUser={setUser} userAccounts={userAccounts} />
 			<SideBar setToggleMainContent={setToggleMainContent} />
 			<TopRightPadding>
 				<MainContentBox>
 					{
 						toggleMainContent ?
-							<RestaurantMenu currRest={currentRestaurant} /> :
-							restaurantData.map((data) => <RestaurantCard {...data} setToggleMainContent={setToggleMainContent} setCurrentRestaurant={setCurrentRestaurant}/>)
+							<RestaurantMenu currentRestaurant={currentRestaurant} /> :
+							restaurantData.map((data) => <RestaurantCard {...data} setToggleMainContent={setToggleMainContent} setCurrentRestaurant={setCurrentRestaurant} />)
 					}
 				</MainContentBox>
 			</TopRightPadding>

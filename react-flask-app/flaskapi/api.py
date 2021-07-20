@@ -1,6 +1,6 @@
 import pymysql
 from flask import Flask, request, jsonify
-from .api_helpers import jsonConversion
+from api_helpers import jsonConversion
 
 app = Flask(__name__)
 
@@ -15,11 +15,14 @@ cursor = db.cursor()
 
 @app.route('/restaurant', methods=['GET'])
 def getRestaurants():
+    print("fetching restaurant data")
     sql = 'SELECT restaurant_name, restaurant_id FROM final_project.restaurant_table;'
     cursor.execute(sql)
     data = cursor.fetchall()
-   
+
+    print(data)
     return jsonConversion(data)
+
 
 @app.route('/user', methods=['GET'])
 def getUsernames():
@@ -27,15 +30,7 @@ def getUsernames():
     cursor.execute(sql)
     data = cursor.fetchall()
 
-    payload = []
-    content = {}
-    for result in data:
-        content = {'user_id': result[1],
-                   'user_name': result[0]}
-        payload.append(content)
-        print(content)
-        content = {}
-    return jsonify(payload)
+    return jsonConversion(data)
 
 
 @app.route('/menu', methods=['POST'])

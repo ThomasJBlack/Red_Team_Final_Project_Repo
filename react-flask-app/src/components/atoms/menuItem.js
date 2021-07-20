@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const ItemWrapper = styled.div `
+const ItemWrapper = styled.div`
     max-width: 400px;
     display: flex;
     flex-wrap: wrap;
@@ -9,20 +9,20 @@ const ItemWrapper = styled.div `
     margin-bottom: 30px;
 `;
 
-const ItemDescription = styled.p `
+const ItemDescription = styled.p`
     width: 100%;
     font-style: italic;
 `;
 
-const MenuItem = () => {
-
+const MenuItem = ({ title, description, price }) => {
+    console.log("MenuItem");
     return (
         <ItemWrapper>
-            <h1>Food Title</h1>
+            <h1>{title}</h1>
             <ItemDescription>
-                Yummy Yummy
+                {description}
             </ItemDescription>
-            <h5>$12.00</h5>
+            <h5>${price}</h5>
         </ItemWrapper>
     )
 }
