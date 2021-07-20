@@ -1,4 +1,3 @@
-import time
 import pymysql
 from flask import Flask, request
 import json
@@ -13,9 +12,6 @@ db = pymysql.connect(
 
 cursor = db.cursor()
 
-@app.route('/time')
-def get_current_time():
-    return {'time': time.time()}
 
 @app.route('/', methods=['GET'])
 def getRestaurants():
