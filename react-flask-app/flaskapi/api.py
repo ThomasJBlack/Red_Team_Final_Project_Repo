@@ -1,6 +1,6 @@
 import pymysql
 from flask import Flask, request, jsonify
-from api_helpers import jsonConversion
+from .api_helpers import jsonConversion
 
 app = Flask(__name__)
 
@@ -31,6 +31,18 @@ def getUsernames():
     data = cursor.fetchall()
 
     return jsonConversion(data)
+
+@app.route('/add_user', methods=['POST'])
+def postUsernames():
+    userName = request.get_json()
+    sql = f"""INSERT INTO final_project.user_table 
+    (user_name)
+    VALUES 
+    ('{userName['newUser']}');"""
+    cursor.execute(sql)
+    db.commit()
+
+    return 'User Posted', 201
 
 
 @app.route('/menu', methods=['POST'])
