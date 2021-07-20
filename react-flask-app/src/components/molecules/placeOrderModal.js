@@ -76,7 +76,7 @@ const Modal = (props) => {
         <ModalContainer>
             <TotalAmountText>Your total is: ${totalCost.toFixed(2)}</TotalAmountText>
             <OrderList>{data}</OrderList>
-            <DarkOrangeBtn>Place Order</DarkOrangeBtn>
+            <DarkOrangeBtn onClick={() => {props.setCart([]); props.onClose()}}>Place Order</DarkOrangeBtn>
             <DarkOrangeBtn onClick={props.onClose}>Back</DarkOrangeBtn>
         </ModalContainer>
     )
