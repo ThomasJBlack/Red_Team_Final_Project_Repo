@@ -40,9 +40,9 @@ const SideBar = (props) => {
     return (
         <SideBarWrapper>
             <DarkOrangeBtn onClick={() => props.setToggleMainContent(false)} >Show Locations</DarkOrangeBtn>
-            <CartTotal />
+            <CartTotal cart={props.cart} setCart={props.setCart} />
             <BlackBtn onClick={() => setShowModal(true)}>Finish and Pay</BlackBtn>
-            {showModal && <Modal onClose={() => setShowModal(false)} showModal={showModal} price={dummyPrice}/>}
+            {showModal && <Modal onClose={() => setShowModal(false)} showModal={showModal} cart={props.cart}/>}
         </SideBarWrapper>
     );
 }

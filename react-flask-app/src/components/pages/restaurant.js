@@ -39,7 +39,7 @@ const MainContentBox = styled.div`
 const Restaurant = () => {
 	const [toggleMainContent, setToggleMainContent] = useState(false);
 	const [user, setUser] = useState('');
-
+	const [cart, setCart] = useState([]);
 	const [userAccounts, setUserAccounts] = useState();
 	const [currentRestaurant, setCurrentRestaurant] = useState();
 
@@ -66,7 +66,9 @@ const Restaurant = () => {
 			srcLogo: AlehouseLogo
 		}
 	]
-	const handleClick = (event) => {
+	const handleClick = (name, price, cart, setCart) => {
+		let newCart = [...cart, {'name': name, 'price': price}];
+		setCart(newCart);
 		// itemName = event.target.value;
 		// define the add to cart button here? 
 	}
@@ -74,12 +76,12 @@ const Restaurant = () => {
 	return (
 		<BodyWrapper key="restaurantWrapper">
 			<Header user={user} setUser={setUser} userAccounts={userAccounts} />
-			<SideBar setToggleMainContent={setToggleMainContent} />
+			<SideBar cart={cart} setCart={setCart} setToggleMainContent={setToggleMainContent} />
 			<TopRightPadding>
 				<MainContentBox>
 					{
 						toggleMainContent ?
-							<RestaurantMenu key="restaurantMenuKey" currentRestaurant={currentRestaurant} handleClick={handleClick} /> :
+							<RestaurantMenu key="restaurantMenuKey" currentRestaurant={currentRestaurant} handleClick={handleClick} cart = {cart} setCart = {setCart}/> :
 							restaurantData.map((data) => <RestaurantCard key={"dataKey" + data.len} {...data} setToggleMainContent={setToggleMainContent} setCurrentRestaurant={setCurrentRestaurant} />)
 					}
 				</MainContentBox>

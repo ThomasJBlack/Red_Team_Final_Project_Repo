@@ -67,7 +67,7 @@ const ItemPrice = styled.h5`
     border-bottom: 2px solid;
 `;
 
-const RestaurantMenu = ({ currentRestaurant, handleClick }) => {
+const RestaurantMenu = ({ currentRestaurant, cart, setCart, handleClick }) => {
 
     const menuData = localJsonData[currentRestaurant[0] - 1];
     const [restaurants, setRestaurants] = useState();
@@ -119,6 +119,8 @@ const RestaurantMenu = ({ currentRestaurant, handleClick }) => {
                                             name={item.name}
                                             description={item.description}
                                             price={item.price} 
+                                            cart={cart}
+                                            setCart={setCart}
                                             handleClick={handleClick} >
                                         </MenuItem>)
                                 })}

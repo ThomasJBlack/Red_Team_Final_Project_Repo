@@ -61,12 +61,21 @@ const OrderList = styled.ol`
 
 const Modal = (props) => {
 
-    const dummyData = ['French Fries', 'Burger', 'Milk Shake'];
+    // const dummyData = ['French Fries', 'Burger', 'Milk Shake'];
+    let data = '';
+    let cart = props.cart;
+    for (let i = 0; i < cart.length; i++)   {
+        data += cart[i]['name'] + '; ';
+    }
+    let totalCost = 0;
+    for (let i = 0; i < cart.length; i++)   {
+        totalCost += cart[i]['price'];
+    }
 
     return (
         <ModalContainer>
-            <TotalAmountText>Your total is: ${props.price}</TotalAmountText>
-            <OrderList>{dummyData}</OrderList>
+            <TotalAmountText>Your total is: ${totalCost.toFixed(2)}</TotalAmountText>
+            <OrderList>{data}</OrderList>
             <DarkOrangeBtn>Place Order</DarkOrangeBtn>
             <DarkOrangeBtn onClick={props.onClose}>Back</DarkOrangeBtn>
         </ModalContainer>
