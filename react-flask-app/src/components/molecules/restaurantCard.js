@@ -31,7 +31,7 @@ const RestaurantCard = ({ id, name, srcLogo, setToggleMainContent, setCurrentRes
 
 
     return (
-        <CardBox>
+        <CardBox key={id + "key"}>
             <img src={srcLogo} />
             <DarkOrangeBtn onClick={() => { setToggleMainContent(true); setCurrentRestaurant([id, name]) }} >Order from {name}</DarkOrangeBtn>
         </CardBox>
