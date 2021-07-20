@@ -81,24 +81,21 @@ def getCart():
 
 @app.route('/add_favorite', methods=['POST'])
 def addFavorite():
-    inputs = request.json()
-    term = input['term']
-    favorite_id = input['favorite_id']
-    user_id = input['user_id']
+    inputs = request.get_json()
+    print(inputs)
+    favorite_id = inputs['restaurant_id']
+    user_id = inputs['user_id']
+    print(favorite_id, user_id)
     sql = f"""
-        INSERT INTO 
-            final_project.favorite_{term}_table
-            ( {term}_id, user_id )
+        INSERT INTO
+            final_project.favorite_restaurant_table
+            ( restaurant_id, user_id )
         VALUES
             ({favorite_id}, {user_id});
-    """
-    try:
-        cursor.execute(sql)
-        db.commit()
-        return True
-    except:
-        db.rollback()
-        return False
+        """
+    cursor.execute(sql)
+    db.commit()
+    return 'user favorited', 201
 
 
 @app.route('/place_order', methods=['POST'])

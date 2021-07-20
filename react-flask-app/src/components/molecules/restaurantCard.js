@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 
 import { blanchedAlmond, black, orangeRed } from '../../helpers/colors';
-import { DarkOrangeBtn } from '../atoms/button';
+import { DarkOrangeBtn, BlackBtn } from '../atoms/button';
 import localJsonData from '../../local-restaurant-json-data.json';
 
 const CardBox = styled.div`
@@ -27,15 +28,29 @@ background-color: ${blanchedAlmond};
     }
 `;
 
-const RestaurantCard = ({ id, name, srcLogo, setToggleMainContent, setCurrentRestaurant }) => {
+const RestaurantCard = ({ id, name, srcLogo, setToggleMainContent, setCurrentRestaurant, user }) => {
+    const [favorite, setFavorite] = useState(true)
 
-
+    const AddFavorite = async (restaurant_id, user_id) => {
+        const addFavorite = { restaurant_id, user_id };
+        const response = await fetch("add_favorite", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(addFavorite)
+        })
+    }
     return (
         <CardBox key={id + "key"}>
             <img src={srcLogo} />
             <DarkOrangeBtn onClick={() => { setToggleMainContent(true); setCurrentRestaurant([id, name]) }} >Order from {name}</DarkOrangeBtn>
+            {
+                favorite ?
+                    <DarkOrangeBtn onClick={() => { AddFavorite(id, user); setFavorite(false) }} >Favorite this Restaurant</DarkOrangeBtn> :
+                    <BlackBtn onClick={() => { setFavorite(true) }} >Unfavorite this Restaurant</BlackBtn>
+            }
         </CardBox>
     );
 }
-
 export default RestaurantCard;
