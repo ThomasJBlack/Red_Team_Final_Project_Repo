@@ -109,26 +109,28 @@ const RestaurantMenu = ({ currentRestaurant, handleClick }) => {
                     <h3>{menuData.menus[0].menu_name}</h3>
                     {
                         menuData.menus[0].menu_sections.map((section) => {
-                            return <>
+                            return <div key={section.section_name + "key"} >
                                 <h3>{section.section_name}</h3>
-                                {section.menu_items.map((item) => {
-                                    console.log(item.name);
-                                    return (
-                                        <MenuItem
-                                            key={item.name + item.price + "key"}
-                                            name={item.name}
-                                            description={item.description}
-                                            price={item.price} 
-                                            handleClick={handleClick} >
-                                        </MenuItem>)
-                                })}
-                            </>
+                                {
+                                    section.menu_items.map((item) => {
+                                        // console.log(item.name);
+                                        return (
+                                            <MenuItem
+                                                key={item.name + item.price + "key"}
+                                                name={item.name}
+                                                description={item.description}
+                                                price={item.price}
+                                                handleClick={handleClick} >
+                                            </MenuItem>)
+                                    })
+                                }
+                            </div>
                         })
                     }
                 </MenuItemContainer>
             </MenuFormContainer>
 
-        </MenuWrapper>
+        </MenuWrapper >
     );
 }
 

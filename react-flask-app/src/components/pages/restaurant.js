@@ -38,7 +38,7 @@ const MainContentBox = styled.div`
 
 const Restaurant = () => {
 	const [toggleMainContent, setToggleMainContent] = useState(false);
-	const [user, setUser] = useState('');
+	const [user, setUser] = useState("1");
 
 	const [userAccounts, setUserAccounts] = useState();
 	const [currentRestaurant, setCurrentRestaurant] = useState();
@@ -80,7 +80,12 @@ const Restaurant = () => {
 					{
 						toggleMainContent ?
 							<RestaurantMenu key="restaurantMenuKey" currentRestaurant={currentRestaurant} handleClick={handleClick} /> :
-							restaurantData.map((data) => <RestaurantCard key={"dataKey" + data.len} {...data} setToggleMainContent={setToggleMainContent} setCurrentRestaurant={setCurrentRestaurant} />)
+							restaurantData.map((data) => <RestaurantCard
+								key={data.name} {...data}
+								setToggleMainContent={setToggleMainContent}
+								setCurrentRestaurant={setCurrentRestaurant}
+								user={user}
+							/>)
 					}
 				</MainContentBox>
 			</TopRightPadding>
