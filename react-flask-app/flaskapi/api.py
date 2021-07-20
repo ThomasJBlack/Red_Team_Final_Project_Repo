@@ -1,5 +1,5 @@
 import pymysql
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import json
 
 app = Flask(__name__)
@@ -19,7 +19,7 @@ def getRestaurants():
     cursor.execute(sql)
     data = cursor.fetchall()
     print(data)
-    return json.loads(data)
+    return data
 
 
 @app.route('/user', methods=['GET'])
@@ -27,7 +27,16 @@ def getUsernames():
     sql = 'SELECT user_name, user_id FROM final_project.user_table;'
     cursor.execute(sql)
     data = cursor.fetchall()
-    return json.loads(data)
+
+    payload = []
+    content = {}
+    for result in data:
+        content = {'user_id': result[1],
+                   'user_name': result[0]}
+        payload.append(content)
+        print(content)
+        content = {}
+    return jsonify(payload)
 
 
 @app.route('/menu', methods=['POST'])
@@ -107,3 +116,8 @@ def placeOrder():
             return True
         except:
             db.rollback()
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+    # when we're done, remove the debug=True

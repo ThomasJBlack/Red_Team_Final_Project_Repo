@@ -60,15 +60,29 @@ const UserDropdown = styled.select`
     padding-inline-start: 40px;
 `;
 
-const LoginModal = ({ onClose, users }) => {
-	return (
-		<ModalContainer>
-			<TotalAmountText>Create User or Login</TotalAmountText>
-			{/* <UserDropdown>{Object.keys(users).map((name, i) => <option key={users[name].user_id} >{name}</option>)}</UserDropdown> */}
-			<DarkOrangeBtn>Create New User</DarkOrangeBtn>
-			<DarkOrangeBtn onClick={onClose}>Back</DarkOrangeBtn>
-		</ModalContainer>
-	)
+
+const LoginModal = ({ user, setUser, onClose, userAccounts }) => {
+    const handleChange = (event) => {
+        userAccounts.find(obj => {
+            if (obj.user_name == event.target.value) {
+                setUser(obj.user_id);
+            }
+        })
+    }
+    return (
+        <ModalContainer>
+            <TotalAmountText>Create User or Login</TotalAmountText>
+            <UserDropdown onChange={handleChange} >
+                {userAccounts.map((item) =>
+                    <option key={item.user_id} name={item.user_id} >
+                        {item.user_name}
+                    </option>)}
+            </UserDropdown>
+            <p>{user}</p>
+            <DarkOrangeBtn>Create New User</DarkOrangeBtn>
+            <DarkOrangeBtn onClick={onClose}>Back</DarkOrangeBtn>
+        </ModalContainer >
+    )
 };
 
 
