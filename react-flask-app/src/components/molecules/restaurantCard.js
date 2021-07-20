@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react'
 
+
 import { blanchedAlmond, black, orangeRed } from '../../helpers/colors';
 import { DarkOrangeBtn, BlackBtn } from '../atoms/button';
 import localJsonData from '../../local-restaurant-json-data.json';
@@ -38,6 +39,7 @@ const CardBox = styled.div`
 //     })
 // }
 
+
 // const RemoveFavorite = async (body) => {
 //     const response = await fetch("remove_favorite", {
 //         method: "POST",
@@ -58,6 +60,7 @@ const RestaurantCard = ({ id, name, srcLogo, setToggleMainContent, setCurrentRes
     //     }
     //     AddFavorite(body);
     // }, [favorite]);
+
 
 
     const AddFavorite = async (restaurant_id, user_id) => {
@@ -83,5 +86,4 @@ const RestaurantCard = ({ id, name, srcLogo, setToggleMainContent, setCurrentRes
         </CardBox>
     );
 }
-
 export default RestaurantCard;

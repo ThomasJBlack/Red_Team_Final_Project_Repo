@@ -97,7 +97,7 @@ def addFavorite():
     db.commit()
     return 'user favorited', 201
 
-
+  
 @app.route('/get_favorite', methods=['GET'])
 def getFavorite():
     inputs = request.json
@@ -111,7 +111,7 @@ def getFavorite():
     cursor.execute(sql)
     return 'user favorited', 201
 
-
+  
 @app.route('/place_order', methods=['POST'])
 def placeOrder():
     user_id = request.json['user_id']
