@@ -11,6 +11,8 @@ import MaialinaLogo from '../../images/MaialinaPizzeriaNapoletana-logo.png';
 import AlehouseLogo from '../../images/MoscowAlehouse-logo.png';
 import SangriaLogo from '../../images/SangriaGrill-logo.png';
 
+import localJsonData from '../../local-restaurant-json-data.json';
+
 
 const BodyWrapper = styled.body`
 margin: 0;
@@ -36,30 +38,18 @@ const MainContentBox = styled.div`
 
 const Restaurant = () => {
 	const [toggleMainContent, setToggleMainContent] = useState(false);
-
 	const [user, setUser] = useState('');
-	const [userAccounts, setUserAccounts] = useState([]);
 
-	const [restaurants, setRestaurants] = useState();
+	const [userAccounts, setUserAccounts] = useState();
+	const [currentRestaurant, setCurrentRestaurant] = useState();
 
 	useEffect(() => {
 		fetch("/user").then(res => res.json()).then(data => {
-			console.log(data);
 			setUserAccounts(data);
-		});
-
-		fetch("/").then(res => {
-			console.log(res);
-			res.json();
-			console.log(res);
-		}).then(data => {
-			// setRestaurants(data.data);
-			console.log("restaurants went");
 		});
 	}, []);
 
-	// console.log(userAccounts);
-	// console.log(restaurants);
+	// console.log(currentRestaurant);
 
 	let restaurantData = [
 		{
@@ -69,14 +59,14 @@ const Restaurant = () => {
 		},
 		{
 			id: 2,
-			name: 'Moscow Alehouse',
-			srcLogo: AlehouseLogo
-		},
-		{
-			id: 3,
 			name: 'Sangria Grill',
 			srcLogo: SangriaLogo
 		},
+		{
+			id: 3,
+			name: 'Moscow Alehouse',
+			srcLogo: AlehouseLogo
+		}
 	]
 
 	return (
@@ -87,8 +77,8 @@ const Restaurant = () => {
 				<MainContentBox>
 					{
 						toggleMainContent ?
-							<RestaurantMenu /> :
-							restaurantData.map((data) => <RestaurantCard key={data.id} {...data} setToggleMainContent={setToggleMainContent} />)
+							<RestaurantMenu currentRestaurant={currentRestaurant} /> :
+							restaurantData.map((data) => <RestaurantCard {...data} setToggleMainContent={setToggleMainContent} setCurrentRestaurant={setCurrentRestaurant} />)
 					}
 				</MainContentBox>
 			</TopRightPadding>
