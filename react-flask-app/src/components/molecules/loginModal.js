@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { orange, darkOrange, blanchedAlmond } from '../../helpers/colors';
@@ -61,25 +62,38 @@ const UserDropdown = styled.select`
 `;
 
 
-const LoginModal = ({ user, setUser, onClose, userAccounts }) => {
+const LoginModal = ({ user, setUser, onClose, userAccounts}) => {
+    const [newUser, setNewUser] = useState('');
+
     const handleChange = (event) => {
-        userAccounts.find(obj => {
-            if (obj.user_name == event.target.value) {
-                setUser(obj.user_id);
-            }
+        setUser(event.target.value)
+    }
+
+
+
+    const AddNewUser = async () => {
+        const add_user = { newUser };
+        const response = await fetch("add_user", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(add_user)  
         })
     }
+
     return (
         <ModalContainer>
             <TotalAmountText>Create User or Login</TotalAmountText>
-            <UserDropdown onChange={handleChange} >
+            <UserDropdown value={userAccounts?.value_id} onChange={handleChange} >
                 {userAccounts.map((item) =>
-                    <option key={item.user_id} name={item.user_id} >
-                        {item.user_name}
+                    <option key={item.value_id} name={item.value_name} value={item.value_id}>
+                        {item.value_name}
                     </option>)}
             </UserDropdown>
             <p>{user}</p>
-            <DarkOrangeBtn>Create New User</DarkOrangeBtn>
+            <input type="text" placeholder={'Insert New User'} onChange={e => setNewUser(e.target.value)} value={newUser}></input>
+            <DarkOrangeBtn type="submit" value="add_user" onClick={ () => {AddNewUser(); onClose()} }>Create New User</DarkOrangeBtn>
             <DarkOrangeBtn onClick={onClose}>Back</DarkOrangeBtn>
         </ModalContainer >
     )

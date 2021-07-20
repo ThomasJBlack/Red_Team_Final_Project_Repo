@@ -49,6 +49,7 @@ const Restaurant = () => {
 		});
 	}, []);
 
+	console.log("--User--", user)
 	// console.log(currentRestaurant);
 
 	let restaurantData = [
