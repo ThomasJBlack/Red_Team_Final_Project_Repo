@@ -21,12 +21,14 @@ def getRestaurants():
     print(data)
     return json.loads(data)
 
+
 @app.route('/user', methods=['GET'])
 def getUsernames():
     sql = 'SELECT user_name, user_id FROM final_project.user_table;'
     cursor.execute(sql)
     data = cursor.fetchall()
     return json.loads(data)
+
 
 @app.route('/menu', methods=['POST'])
 def getMenu():
@@ -84,10 +86,11 @@ def addFavorite():
         db.rollback()
         return False
 
+
 @app.route('/place_order', methods=['POST'])
 def placeOrder():
-    user_id = user_id
-    item_ids = [item_ids]
+    user_id = request.json['user_id']
+    item_ids = request.json['item_ids']
     order_number = 0
     for item_id in item_ids:
         sql = f"""
