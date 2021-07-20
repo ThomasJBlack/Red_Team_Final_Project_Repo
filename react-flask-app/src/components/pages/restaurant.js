@@ -11,6 +11,8 @@ import MaialinaLogo from '../../images/MaialinaPizzeriaNapoletana-logo.png';
 import AlehouseLogo from '../../images/MoscowAlehouse-logo.png';
 import SangriaLogo from '../../images/SangriaGrill-logo.png';
 
+import local_json_data from '../../../../sql scripts/mini_restaurant_data.json';
+
 
 const BodyWrapper = styled.body`
 margin: 0;
@@ -37,14 +39,19 @@ const MainContentBox = styled.div`
 const Restaurant = () => {
 	const [toggleMainContent, setToggleMainContent] = useState(false);
 	const [user, setUser] = useState('');
-	const [users, setUsers] = useState([]);
+
+	const [userAccounts, setUserAccounts] = useState();
+
+	const restaurant_id = 0;
 
 	useEffect(() => {
-		fetch("/user").then(res => res.json()).then(data => {
-			console.log(data);
-			setUsers(data);
+		fetch("/user", body = { 'restaurant_id': restaurant_id }).then(res => res.json()).then(data => {
+			setUserAccounts(data.data);
 		});
-	}, []);
+	}, [])
+
+
+	console.log(userAccounts);
 
 	let cardData = [
 		{
@@ -66,7 +73,7 @@ const Restaurant = () => {
 
 	return (
 		<BodyWrapper>
-			<Header user={user} setUser={setUser} />
+			<Header user={user} setUser={setUser} userAccounts={userAccounts} />
 			<SideBar setToggleMainContent={setToggleMainContent} />
 			<TopRightPadding>
 				<MainContentBox>

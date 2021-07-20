@@ -1,5 +1,8 @@
-from flask import Flask, request
+import time
+from flask.wrappers import Request
+
 import pymysql
+from flask import Flask, request
 
 app = Flask(__name__)
 
@@ -11,27 +14,27 @@ db = pymysql.connect(
 
 cursor = db.cursor()
 
-# @app.route('/time')
-# def get_current_time():
-#     return {'time': time.time()}
+
+@app.route('/time')
+def get_current_time():
+    return {'time': time.time()}
 
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def getRestaurants():
     sql = 'SELECT restaurant_name FROM final_project.restaurant_table;'
     return cursor.execute(sql)
 
 
-@app.route('/user')
+@app.route('/user', methods=['GET'])
 def getUsernames():
     sql = 'SELECT user_name FROM final_project.user_table;'
     return cursor.execute(sql)
 
 
-@app.route('/menu')
+@app.route('/menu', methods=['POST'])
 def getMenu():
-    # pull out of a form? or use the url?
-    restaurant_id = request.form['restaurant_id']
+    restaurant_id = request.json['restaurant_id']
     sql = f"""
         SELECT 
             item_name, item_price, item_id
@@ -43,10 +46,9 @@ def getMenu():
     return cursor.execute(sql)
 
 
-@app.route('/cart')
+@app.route('/cart', methods=['POST'])
 def getCart():
-    # pull out of a form? or use the url?
-    user_id = request.form['user_id']
+    user_id = request.json['user_id']
     sql = f"""
         SELECT
             item_name, item_price
@@ -60,5 +62,21 @@ def getCart():
     return cursor.execute(sql)
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+@app.route('/add_favorite', methods=['POST'])
+def addFavorite():
+    term = request.form['term']
+    favorite_id = request.form['favorite_id']
+    user_id = request.form['user_id']
+    sql = f"""
+        INSERT INTO 
+            final_project.favorite_{term}_table
+            ( {term}_id, user_id )
+        VALUES
+            ({favorite_id}, {user_id});
+    """
+    try:
+        cursor.execute(sql)
+        db.commit()
+        return True
+    except:
+        return False
