@@ -36,31 +36,18 @@ const MainContentBox = styled.div`
 
 const Restaurant = () => {
 	const [toggleMainContent, setToggleMainContent] = useState(false);
-
 	const [user, setUser] = useState('');
-	const [userAccounts, setUserAccounts] = useState([]);
-
-	const [restaurants, setRestaurants] = useState();
+	
+	const [userAccounts, setUserAccounts] = useState();
+	const [currentRestaurant, setCurrentRestaurant] = useState();
 
 	useEffect(() => {
 		fetch("/user").then(res => res.json()).then(data => {
-			console.log(data);
-			setUserAccounts(data);
+		  setUserAccounts(data.data);
 		});
+	  }, []);
 
-		fetch("/").then(res => {
-			console.log(res);
-			res.json();
-			console.log(res);
-		}).then(data => {
-			// setRestaurants(data.data);
-			console.log("restaurants went");
-		});
-	}, []);
-
-	// console.log(userAccounts);
-	// console.log(restaurants);
-
+	console.log(currentRestaurant);
 	let restaurantData = [
 		{
 			id: 1,
@@ -81,14 +68,14 @@ const Restaurant = () => {
 
 	return (
 		<BodyWrapper>
-			<Header user={user} setUser={setUser} userAccounts={userAccounts} />
+			<Header user={user} setUser={setUser} userAccounts={userAccounts}/>
 			<SideBar setToggleMainContent={setToggleMainContent} />
 			<TopRightPadding>
 				<MainContentBox>
 					{
 						toggleMainContent ?
-							<RestaurantMenu /> :
-							restaurantData.map((data) => <RestaurantCard key={data.id} {...data} setToggleMainContent={setToggleMainContent} />)
+							<RestaurantMenu currRest={currentRestaurant} /> :
+							restaurantData.map((data) => <RestaurantCard {...data} setToggleMainContent={setToggleMainContent} setCurrentRestaurant={setCurrentRestaurant}/>)
 					}
 				</MainContentBox>
 			</TopRightPadding>
