@@ -36,39 +36,44 @@ const MainContentBox = styled.div`
 
 const Restaurant = () => {
 	const [toggleMainContent, setToggleMainContent] = useState(false);
+
 	const [user, setUser] = useState('');
-	
-	const [userAccounts, setUserAccounts] = useState();
+	const [userAccounts, setUserAccounts] = useState([]);
+
 	const [restaurants, setRestaurants] = useState();
 
 	useEffect(() => {
 		fetch("/user").then(res => res.json()).then(data => {
-		  setUserAccounts(data.data);
+			console.log(data);
+			setUserAccounts(data);
 		});
 
-		fetch("/").then(res => res.json()).then(data => {
-			setRestaurants(data.data);
-			console.log("restaurants went")
-
+		fetch("/").then(res => {
+			console.log(res);
+			res.json();
+			console.log(res);
+		}).then(data => {
+			// setRestaurants(data.data);
+			console.log("restaurants went");
 		});
-	  }, []);
+	}, []);
 
 	// console.log(userAccounts);
 	// console.log(restaurants);
 
 	let restaurantData = [
 		{
-			id: '',
+			id: 1,
 			name: 'Maialina Pizzeria Napoletana',
 			srcLogo: MaialinaLogo
 		},
 		{
-			id: '',
+			id: 2,
 			name: 'Moscow Alehouse',
 			srcLogo: AlehouseLogo
 		},
 		{
-			id: '',
+			id: 3,
 			name: 'Sangria Grill',
 			srcLogo: SangriaLogo
 		},
@@ -76,14 +81,14 @@ const Restaurant = () => {
 
 	return (
 		<BodyWrapper>
-			<Header user={user} setUser={setUser} userAccounts={userAccounts}/>
+			<Header user={user} setUser={setUser} userAccounts={userAccounts} />
 			<SideBar setToggleMainContent={setToggleMainContent} />
 			<TopRightPadding>
 				<MainContentBox>
 					{
 						toggleMainContent ?
 							<RestaurantMenu /> :
-							restaurantData.map((data) => <RestaurantCard {...data} setToggleMainContent={setToggleMainContent} />)
+							restaurantData.map((data) => <RestaurantCard key={data.id} {...data} setToggleMainContent={setToggleMainContent} />)
 					}
 				</MainContentBox>
 			</TopRightPadding>
