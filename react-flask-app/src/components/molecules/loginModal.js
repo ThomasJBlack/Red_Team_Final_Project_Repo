@@ -79,7 +79,7 @@ const LoginModal = ({ user, setUser, onClose, userAccounts }) => {
                     </option>)}
             </UserDropdown>
             <p>{user}</p>
-            <DarkOrangeBtn>Create New Uaser</DarkOrangeBtn>
+            <DarkOrangeBtn>Create New User</DarkOrangeBtn>
             <DarkOrangeBtn onClick={onClose}>Back</DarkOrangeBtn>
         </ModalContainer >
     )
