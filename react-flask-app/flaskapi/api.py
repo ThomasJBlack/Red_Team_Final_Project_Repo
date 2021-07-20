@@ -1,6 +1,6 @@
 import pymysql
 from flask import Flask, request, jsonify
-from .api_helpers import jsonConversion
+from api_helpers import jsonConversion
 
 app = Flask(__name__)
 
@@ -97,7 +97,21 @@ def addFavorite():
     db.commit()
     return 'user favorited', 201
 
+  
+@app.route('/get_favorite', methods=['GET'])
+def getFavorite():
+    inputs = request.json
+    user_id = inputs['user_id']
+    print(user_id + "userid")
+    sql = f"""
+        SELECT * FROM final_project.favorite_restaurant_table
+        WHERE final_project.favorite_restaurant_table.user_id = {user_id};
+        """
 
+    cursor.execute(sql)
+    return 'user favorited', 201
+
+  
 @app.route('/place_order', methods=['POST'])
 def placeOrder():
     user_id = request.json['user_id']

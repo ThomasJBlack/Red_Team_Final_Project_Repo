@@ -87,7 +87,7 @@ const LoginModal = ({ user, setUser, onClose, userAccounts}) => {
             <TotalAmountText>Create User or Login</TotalAmountText>
             <UserDropdown value={userAccounts?.value_id} onChange={handleChange} >
                 {userAccounts.map((item) =>
-                    <option key={item.value_id} name={item.value_name} value={item.value_id}>
+                    <option key={item.value_id} value={item.value_id} >
                         {item.value_name}
                     </option>)}
             </UserDropdown>

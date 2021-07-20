@@ -38,7 +38,7 @@ const MainContentBox = styled.div`
 
 const Restaurant = () => {
 	const [toggleMainContent, setToggleMainContent] = useState(false);
-	const [user, setUser] = useState('');
+	const [user, setUser] = useState('1');
 	const [cart, setCart] = useState([]);
 	const [userAccounts, setUserAccounts] = useState();
 	const [currentRestaurant, setCurrentRestaurant] = useState();
@@ -67,7 +67,7 @@ const Restaurant = () => {
 		}
 	]
 	const handleClick = (name, price, cart, setCart) => {
-		let newCart = [...cart, {'name': name, 'price': price}];
+		let newCart = [...cart, { 'name': name, 'price': price }];
 		setCart(newCart);
 		// itemName = event.target.value;
 		// define the add to cart button here? 
@@ -81,8 +81,13 @@ const Restaurant = () => {
 				<MainContentBox>
 					{
 						toggleMainContent ?
-							<RestaurantMenu key="restaurantMenuKey" currentRestaurant={currentRestaurant} handleClick={handleClick} cart = {cart} setCart = {setCart}/> :
-							restaurantData.map((data) => <RestaurantCard key={"dataKey" + data.len} {...data} setToggleMainContent={setToggleMainContent} setCurrentRestaurant={setCurrentRestaurant} />)
+							<RestaurantMenu key="restaurantMenuKey" currentRestaurant={currentRestaurant} handleClick={handleClick} /> :
+							restaurantData.map((data) => <RestaurantCard
+								key={data.name} {...data}
+								setToggleMainContent={setToggleMainContent}
+								setCurrentRestaurant={setCurrentRestaurant}
+								user={user}
+							/>)
 					}
 				</MainContentBox>
 			</TopRightPadding>
