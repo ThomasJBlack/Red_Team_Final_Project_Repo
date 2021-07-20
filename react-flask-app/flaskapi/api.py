@@ -1,6 +1,6 @@
 import pymysql
 from flask import Flask, request, jsonify
-from api_helpers import jsonConversion
+from .api_helpers import jsonConversion
 
 app = Flask(__name__)
 

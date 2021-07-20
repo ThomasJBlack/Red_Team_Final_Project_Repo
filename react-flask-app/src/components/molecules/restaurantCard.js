@@ -19,6 +19,7 @@ background-color: ${blanchedAlmond};
     &:hover {
         border: 4px solid orange;
         border-radius: 10px;
+        transform: rotate(0deg);
     }
 
     & > * {
@@ -32,7 +33,7 @@ const RestaurantCard = ({ id, name, srcLogo, setToggleMainContent, setCurrentRes
     return (
         <CardBox>
             <img src={srcLogo} />
-            <DarkOrangeBtn onClick={() => { setToggleMainContent(true); setCurrentRestaurant(id) }} >Order from {name}</DarkOrangeBtn>
+            <DarkOrangeBtn onClick={() => { setToggleMainContent(true); setCurrentRestaurant([id, name]) }} >Order from {name}</DarkOrangeBtn>
         </CardBox>
     );
 }

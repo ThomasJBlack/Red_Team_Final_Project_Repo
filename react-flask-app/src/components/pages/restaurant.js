@@ -49,8 +49,6 @@ const Restaurant = () => {
 		});
 	}, []);
 
-	// console.log(currentRestaurant);
-
 	let restaurantData = [
 		{
 			id: 1,
