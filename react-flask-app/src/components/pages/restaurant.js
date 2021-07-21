@@ -81,7 +81,7 @@ const Restaurant = () => {
 				<MainContentBox>
 					{
 						toggleMainContent ?
-							<RestaurantMenu key="restaurantMenuKey" currentRestaurant={currentRestaurant} handleClick={handleClick} /> :
+							<RestaurantMenu key="restaurantMenuKey" currentRestaurant={currentRestaurant} handleClick={handleClick} cart={cart} setCart={setCart}/> :
 							restaurantData.map((data) => <RestaurantCard
 								key={data.name} {...data}
 								setToggleMainContent={setToggleMainContent}
